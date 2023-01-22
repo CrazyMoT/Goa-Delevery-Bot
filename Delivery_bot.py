@@ -12,9 +12,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 from aiogram.dispatcher.filters.state import StatesGroup, State
 import emoji
 
-api = '5682303320:AAFLooixecomGKtze-THfEDmxGMldbOVw30'
-# 5639496861:AAEnNB-36n0e0CY3JyUOhCOasb54erUYf34 рабочий апи
-# 5682303320:AAFLooixecomGKtze-THfEDmxGMldbOVw30 тест апи
+api = ''
 logging.basicConfig(level=logging.INFO)
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
@@ -139,20 +137,6 @@ Locate_list = []
 Total_price = []
 Prices = []
 
-# deep_link = f"http://t.me/{bot_user.username}?start=referl"
-# deep_link_arg = await get_start_link("referal")
-
-# по рефералке
-# @dp.message_handler(CommandStart(deep_link=compile(r"\w+")))
-# async def bot_start_deeplink(message: types.Message):
-#     deep_link_arg = message.get_args()
-# отправить юзер_ид в БД
-#
-# await message.answer(f"Привет, {message.from_user.full_name}! "
-#                      f"Мы привезем Вам заказ в течении часа "
-#                      f"или сделаем скидку 50% на доставку")
-
-# Без рефералки
 
 start = (f"Бот создан для доставки по Северному Гоа, "
          f"\nВремя работы с 12 дня до 12 ночи"
@@ -209,15 +193,7 @@ async def bot_start(message: types.Message, state: FSMContext):
     Basket_List.clear()
     Locate_list.clear()
     Prices.clear()
-    #                         f"или сделаем скидку 50% на доставку",
 
-
-# @dp.message_handler()
-# async def timese(message:types.Message):
-#     times = datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour, datetime.now().minute)
-#     if times.hour == :
-#         await bot.send_message(message.from_user.id, f'',
-#                                reply_markup=start_menu)
 
 
 @dp.message_handler(commands=['order'])
@@ -264,15 +240,6 @@ async def starter(message: types.Message):
     else:
         await message.answer('Выберете категорию', reply_markup=Choose_Cafe_menu)
 
-
-# @dp.message_handler(Text(equals=['Fruits']))
-# async def starter(message: types.Message):
-#     await message.answer('Here you go', reply_markup=fruit_menu)
-#
-#
-# @dp.message_handler(Text(equals=['Countries']))
-# async def starter(message: types.Message):
-#     await message.answer('Here you go', reply_markup=country_menu)
 
 @dp.message_handler(Text(equals=['Назад']))
 async def starter(message: types.Message):
@@ -366,7 +333,7 @@ async def starter(message: types.Message, state: FSMContext):
                                text=f"Заказ на {p} Rs. "
                                     f"Выберете локацию",
                                reply_markup=Geo_menu)
-    # await Price.Price.set()
+    
 
 
 @dp.message_handler(content_types=types.ContentType.LOCATION)
@@ -541,12 +508,6 @@ async def starter(message: types.Message, state: FSMContext):
         await bot.send_message(chat_id=admin_id, text=f"{l1} {l2}")
     await bot.send_message(chat_id=chat_id, text='Спасибо за заказ. Курьер приедет в течении часа.',
                            reply_markup=finish_menu)
-    # id = message.message_id + 3
-    # time = int(60)
-    # for time_left in range(time - 1, -1, -1):
-    #     await asyncio.sleep(60)
-    #     await bot.edit_message_text(chat_id=chat_id, message_id=id,
-    #                                 text=f"Спасибо за заказ. Курьер приедет через {time_left} минут")
     await state.reset_state(with_data=True)
 
 
@@ -571,13 +532,6 @@ async def starter(message: types.Message):
                                                       f"{Basket_List}, {P1} Rs")
         await bot.send_message(chat_id=admin_id, text=f"{l1} {l2}")
 
-    # id = message.message_id + 1
-    # chat_id = message.chat.id
-    # time = int(60)
-    # for time_left in range(time - 1, -1, -1):
-    #     await asyncio.sleep(60)
-    #     await bot.edit_message_text(chat_id=chat_id, message_id=id,
-    #                                 text=f"Спасибо за заказ. Курьер приедет через {time_left} минут")
 
 
 @dp.message_handler(Text(equals=['Доставка получена']))
